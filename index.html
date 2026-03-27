@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000d0e">
+
+<title>Monterrey FTTH</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+:root{
+--primary:#009ca4;
+--orange:#F7941D;
+--magenta:#EC008C;
+--bg:#000d0e;
+--text:#ff7b00;
+--video:#ffffff;
+}
+
+body{
+
+font-family:'Montserrat',sans-serif;
+background:var(--bg);
+color:white;
+
+min-height:10vh;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+
+text-align:center;
+padding:25px;
+}
+
+/* decoraciones fondo */
+
+body::before{
+content:'';
+position:fixed;
+width:420px;
+height:420px;
+border-radius:100%;
+background:radial-gradient(circle,var(--primary),transparent 65%);
+top:-120px;
+left:-120px;
+opacity:.18;
+}
+
+body::after{
+content:'';
+position:fixed;
+width:320px;
+height:320px;
+border-radius:50%;
+background:radial-gradient(circle,var(--primary),transparent 65%);
+bottom:-100px;
+right:-100px;
+opacity:.12;
+}
+
+/* logo */
+
+.logo{
+width:140px;
+margin-bottom:18px;
+filter:drop-shadow(0 0 12px rgba(0,156,164,0.5));
+}
+
+/* linea superior */
+
+.top-line{
+
+width:100%;
+max-width:420px;
+height:3px;
+
+background:radial-gradient(circle,#009ca4,#000000);
+
+border-radius:20px;
+
+margin-bottom:28px;
+}
+
+/* textos */
+
+h1{
+
+color:var(--text);
+font-weight:700;
+font-size:24px;
+letter-spacing:1px;
+margin-bottom:4px;
+
+}
+
+h2{
+
+color:var(--primary);
+font-size:19px;
+font-weight:600;
+margin-top:35px;
+
+}
+
+h3{
+
+color:var(--video);
+font-size:21px;
+font-weight:800;
+margin-top:20px;
+
+}
+
+/* video */
+
+.video-preview{
+
+position:relative;
+width:100%;
+max-width:420px;
+
+margin:12px 0;
+
+}
+
+.video-preview img{
+
+width:100%;
+border-radius:14px;
+margin-top:9px;
+cursor:pointer;
+}
+
+/* boton play */
+
+.play-button{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:70px;height:70px;
+border-radius:50%;
+border:none;
+background:rgba(0,0,0,0.65);
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+
+.play-button svg{
+
+fill:white;
+width:32px;
+height:32px;
+
+}
+
+video{
+
+display:none;
+width:100%;
+border-radius:14px;
+background:black;
+margin-top:9px;
+
+}
+
+/* imagen inferior */
+
+.footer-img{
+
+margin-top:35px;
+height:100px;
+
+}
+
+/* lineas inferiores */
+
+.color-strip{
+
+display:flex;
+gap:6px;
+justify-content:center;
+
+margin-top:28px;
+
+width:100%;
+max-width:420px;
+
+}
+
+.color-strip span{
+
+height:3px;
+border-radius:999px;
+
+flex:1;
+
+}
+
+.cs1{background:#ff7b00;}
+.cs2{background:#009da3;}
+.cs3{background:#f70083;}
+.cs4{background:#ffd92a;}
+
+</style>
+</head>
+
+<body>
+
+<img src="izzi.png" class="logo" draggable="false">
+
+<div class="top-line"></div>
+
+<h1>MONTERREY FTTH</h1>
+
+<h2>POR FAVOR OBSERVE EL VIDEO</h2>
+<h3 id="videoTitulo">CONECTOR Y PLANTILLA</h3>
+
+<div class="video-preview">
+
+<img src="MF1.png" id="previewImg1" onclick="playVideo()" draggable="false">
+
+<button class="play-button" onclick="playVideo()">
+
+<svg viewBox="0 0 24 24">
+<path d="M8 5v14l11-7z"/>
+</svg>
+
+</button>
+
+<video 
+id="video1" 
+src="MF1.mp4" 
+controls 
+controlsList="nodownload noplaybackrate"
+disablePictureInPicture
+></video>
+
+</div>
+
+<div class="color-strip">
+<span class="cs1"></span>
+<span class="cs2"></span>
+<span class="cs3"></span>
+<span class="cs4"></span>
+</div>
+
+<script>
+
+function playVideo(){
+
+const video=document.getElementById("video1");
+const img=document.getElementById("previewImg1");
+const btn=document.querySelector(".play-button");
+
+img.style.display="none";
+btn.style.display="none";
+video.style.display="block";
+
+video.play();
+
+}
+
+/* CAMBIO AUTOMATICO DE VIDEO CADA LUNES */
+
+const inicio = new Date("2026-03-30");
+const hoy = new Date();
+
+const diferencia = hoy - inicio;
+
+const semana = Math.floor(diferencia / (1000*60*60*24*7));
+
+const lista = [
+{video:"MF1.mp4", img:"MF1.png", titulo:"CONECTOR Y PLANTILLA"},
+{video:"MF2.mp4", img:"MF2.png", titulo:"LIMPIEZA CONECTOR"},
+{video:"MF3.mp4", img:"MF3.png", titulo:"PINZA PELADORA CUIDADOS"},
+{video:"MF4.mp4", img:"MF4.png", titulo:"USO DE PLANTILLA"},
+{video:"MF5.mp4", img:"MF5.png", titulo:"DROP CUIDADOS"}
+];
+
+let index = 0;
+
+if(semana >= 0){
+index = semana;
+}
+
+if(index >= lista.length){
+index = lista.length - 1;
+}
+
+document.getElementById("video1").src = lista[index].video;
+document.getElementById("previewImg1").src = lista[index].img;
+document.getElementById("videoTitulo").textContent = lista[index].titulo;
+
+/* BLOQUEAR CLICK DERECHO */
+
+document.addEventListener("contextmenu",function(e){
+e.preventDefault();
+});
+
+/* BLOQUEAR ARRASTRAR IMAGENES Y VIDEO */
+
+document.addEventListener("dragstart",function(e){
+e.preventDefault();
+});
+
+</script>
+
+</body>
+</html>
